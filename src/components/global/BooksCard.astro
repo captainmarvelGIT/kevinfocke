@@ -1,0 +1,240 @@
+---
+import { Image } from 'astro:assets';
+import defaultBookImage from '../../assets/images/books_sec1.png';
+
+interface BooksPara {
+  title: string;
+  paras: string;
+}
+
+interface Props {
+  code_monst_book?: ImageMetadata;
+  books_title?: string;
+  book_sec_title?: string;
+  books_para_lft?: BooksPara;
+  books_para_rgt?: BooksPara;
+}
+
+const {
+  code_monst_book = defaultBookImage,
+  books_title = 'Escape From Number Hell',
+  book_sec_title = 'Code Monster Manual Vol. 0',
+  books_para_lft = {
+    title: 'Computer fundamentals, the book I wish I had.',
+    paras: 'The creative glue for intermediatelevel programming concepts.',
+  },
+  books_para_rgt = {
+    title: 'Improve your programming versatility',
+    paras: 'By learning the nuances of numbers & their representations. ',
+  },
+} = Astro.props;
+---
+
+<div class="books-card">
+  <h4>{books_title}</h4>
+  <h2><span>THE</span> {book_sec_title}</h2>
+  <div class="sec-book">
+    <Image src={code_monst_book} alt={book_sec_title} />
+  </div>
+  <div class="books-funda-wrap">
+    <div class="books-funda-left">
+      <h6>{books_para_lft.title}</h6>
+      <p>{books_para_lft.paras}</p>
+    </div>
+    <div class="books-funda-right">
+      <h6>{books_para_rgt.title}</h6>
+      <p>{books_para_rgt.paras}</p>
+    </div>
+  </div>
+</div>
+
+<style >
+  .books-card h4 {
+    font-size: 35px;
+    font-weight: 300;
+    line-height: 41px;
+    letter-spacing: 0.3em;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+  }
+
+  .books-card h2 {
+    color: var(--color-white-10);
+    font-size: 220px;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    text-align: center;
+    position: relative;
+    width: fit-content;
+    margin-inline: auto;
+  }
+
+  .books-card h2 span {
+    color: var(--color-orange);
+    font-size: 70px;
+    text-transform: uppercase;
+    letter-spacing: -5px;
+    -webkit-text-stroke-width: 5.24px;
+    -webkit-text-stroke-color: var(--color-stroke-dark);
+    position: absolute;
+    left: 70px;
+    top: 40px;
+  }
+
+  .books-card .sec-book {
+    text-align: center;
+    margin-top: -375px;
+    position: relative;
+  }
+
+  .books-card .sec-book img {
+    filter:
+      drop-shadow(147px 212px 103px var(--color-shadow-01))
+      drop-shadow(83px 119px 87px var(--color-shadow-05))
+      drop-shadow(37px 53px 65px var(--color-shadow-09))
+      drop-shadow(9px 13px 36px var(--color-shadow-10));
+    transform: translateX(20px);
+  }
+
+  .books-card .books-funda-wrap {
+    display: flex;
+    justify-content: space-between;
+    padding: 60px 0 70px;
+    border-top: 1px solid var(--color-white-10);
+    margin-top: -240px;
+  }
+
+  .books-card .books-funda-wrap > * {
+    max-width: 510px;
+  }
+
+  .books-card .books-funda-left {
+    text-align: right;
+  }
+
+  .books-card h6 {
+    color: var(--color-white-100);
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 43px;
+    margin-bottom: 20px;
+  }
+
+
+  
+  .books-card.books_sl_sec_2 h2 span {
+    color: var(--color-purple);
+    -webkit-text-stroke-color: var(--color-stroke-blue);
+  }
+
+  
+  /* ── Responsive ──────────────────────────────────────────────── */
+  @media (max-width: 1900px) {
+    .books-card h2{
+      font-size: 190px;
+    }
+    .books-card h2 span{
+      left: 30px;
+      top: 30px;
+    }
+    .books-card .sec-book {
+        margin-top: -325px;
+        width: 400px;
+        margin-inline: auto;
+    }
+    .books-card .books-funda-wrap{
+      margin-top: -160px;
+    }
+    .books-card .books-funda-wrap > * {
+    max-width: 460px;
+}
+  }
+  @media (max-width: 1399px) {
+    .books-card h2 {
+        font-size: 160px;
+    }
+    .books-card .sec-book {
+        margin-top: -255px;
+        width: 320px;
+    }
+    .books-card .books-funda-wrap > * {
+        max-width: 400px;
+    }
+    .books-card h6 {
+        font-size: 30px;
+        line-height: 40px;
+        margin-bottom: 10px;
+    }
+  }
+  @media (max-width: 1199px) {
+    .books-card h2 {
+        font-size: 120px;
+    }
+    .books-card h2 span {
+        left: 60px;
+        top: 15px;
+        font-size: 50px;
+        -webkit-text-stroke-width: 2px;
+    }
+    .books-card h4{
+      font-size: 25px;
+    }
+    .books-card .sec-book {
+        margin-top: -195px;
+        width: 300px;
+    }
+    .books-card .books-funda-wrap{
+      padding-top: 170px;
+    }
+  }
+  @media (max-width: 991px)  {
+        .books-card .books-funda-wrap {
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+    }
+    .books-card .books-funda-wrap > * {
+        max-width: 100%;
+        text-align: left;
+    }
+    .books-card .books-funda-wrap > * + *{
+      border-top: 1px solid var(--color-white-10);
+      padding-top: 24px;
+    }
+  }
+  @media (max-width: 767px)  {
+    .books-card h4 {
+        font-size: 15px;
+        line-height: 1.5;
+    }
+    .books-card h2 {
+    font-size: 50px;
+}
+.books-card h2 span {
+    left: 0px;
+    top: 10px;
+    font-size: 25px;
+    -webkit-text-stroke-width: 1px;
+    letter-spacing: -2px;
+}
+.books-card .sec-book {
+    margin-top: -65px;
+    width: 160px;
+}
+.books-card .sec-book img{
+  transform: translateX(10px);
+}
+.books-card .books-funda-wrap {
+    padding-top: 140px;
+    margin-top: -120px;
+    padding-bottom: 24px;
+}
+.books-card h6 {
+    font-size: 20px;
+    line-height: 28px;
+    margin-bottom: 6px;
+}
+
+  }
+</style>

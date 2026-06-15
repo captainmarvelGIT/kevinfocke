@@ -1,0 +1,46 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'input'> {
+  class?: string;
+}
+
+const { class: className = '', ...rest } = Astro.props as Props;
+---
+
+<input class={`form-input ${className}`} {...rest} />
+
+<style>
+  .form-input {
+    width: 100%;
+    padding: 0 25px;
+    height: 70px;
+    border-radius: 14px;
+    outline: none;
+    font-size: 20px;
+    line-height: 1;
+    color: var(--color-text-dark);
+    background-color: var(--color-text);
+    border: 2px solid transparent;
+  }
+
+  .form-input:placeholder {
+    color: var(--color-white-50);    
+    letter-spacing: -0.03em;
+  }
+
+  .form-input:focus {
+    border-color: var(--color-input-focus);
+  }
+
+  @media(max-width:767px){
+
+    .form-input {
+        padding: 0 15px;
+        height: 40px;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+    
+  }
+</style>

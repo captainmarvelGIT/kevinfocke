@@ -1,0 +1,218 @@
+---
+import { Image } from "astro:assets";
+import BaseButton from "../ui/BaseButton.astro";
+import AnimatedCircle from "../ui/AnimatedCircle.astro";
+import monster2 from "../../assets/images/bnnr_mons_2.png";
+import bannerBgnw from "../../assets/images/bnnr_nw.png";
+import BannerCardSlider from "../global/BannerCardSlider.astro";
+
+interface Props {
+  bnnr_title?: string;
+  bnnr_subtitle?: string;
+  bnnr_highlight?: string;
+  bnnr_desc?: string;
+  banner_btn1?: {
+    text: string;
+    link: string;
+  };
+  banner_btn2?: {
+    text: string;
+    link: string;
+  };
+}
+
+const {
+  bnnr_subtitle = "LEARN BACKEND PROGRAMMING THROUGH",
+  bnnr_title = "The Code",
+  bnnr_highlight = "Monster Manual",
+  bnnr_desc = "Aliquam eu sem maximus, tincidunt tortor eget, vulputate lacus. Nulla in lorem rhoncus, vestibulum nulla et, efficitur risus.",
+  banner_btn1 = {
+    text: "Vol. 0 Free Sample",
+    link: "https://kevinfocke.com/The-Code-Monster-Manual-Vol-0-Sample.pdf",
+  },
+  banner_btn2 = {
+    text: "Buy Books Now!",
+    link: "book_card_sec",
+  },
+}: Props = Astro.props;
+---
+
+<section class="bnnr_sec" style={`background-image: url(${bannerBgnw.src});`}>
+  <div class="container">
+    <div class="bnnr_sec_cnctwrp">
+      <div class="bnr_cnct">
+        <div class="bbnr_mons">
+          <Image
+            src={monster2}
+            alt="The Code Monster mascot"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </div>
+        <div class="bnnr_txts">
+          <h2>{bnnr_subtitle}</h2>
+          <h1>{bnnr_title} <span>{bnnr_highlight}</span></h1>
+          <p>{bnnr_desc}</p>
+          <div class="bnnr_bttns">
+            <BaseButton href={banner_btn1.link} text={banner_btn1.text} variant="primary" target=_blank/>
+            <BaseButton text={banner_btn2.text} scrollTo={banner_btn2.link} variant="secondary"/>
+          </div>
+        </div>
+      </div>
+      <div class="bnnr_sldr_wrp">
+        <BannerCardSlider />
+      </div>
+    </div>
+    <div class="btm_anim_wrp">
+      <button onclick="document.getElementById('about_sec')?.scrollIntoView({ behavior: 'smooth' })">
+        <AnimatedCircle />
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bnnr_sec {
+    padding: 120px 0 80px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top left calc(50% - 420px);
+    position: relative;
+    overflow: hidden;
+  }
+  .bnnr_sec h2 {
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 32px;
+    letter-spacing: 0.32em;
+    margin-bottom: 20px;
+  }
+  .bnnr_sec h1 {
+    margin-bottom: 30px;
+  }
+  .bnnr_sec p {
+    font-size: 20px;
+    margin-bottom: 30px;
+  }
+  .bnnr_bttns {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+  .bbnr_mons {
+    text-align: center;
+    margin-bottom: -420px;
+  }
+
+  .bbnr_mons img {
+    width: 540px;
+  }
+  .bnnr_sec_cnctwrp {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .bnr_cnct {
+    flex: 0 0 auto;
+    width: 750px;
+  }
+
+  .btm_anim_wrp {
+    text-align: center;
+    margin-top: -40px;
+  }
+
+  .btm_anim_wrp button {
+    background-color: transparent;
+    padding: 0;
+  }
+
+  /* ── Responsive ──────────────────────────────────────────────── */
+  @media (max-width: 1900px) {
+    .bnnr_sec {
+      padding: 80px 0 40px;
+      background-position: bottom left calc(50% - 250px);
+      background-size: 1920px;
+    }
+    .bnr_cnct {
+      padding-left: 20px;
+    }
+    .bbnr_mons img {
+      width: 450px;
+    }
+  }
+  @media (max-width: 1399px) {
+    .btm_anim_wrp {
+      margin-top: -20px;
+    }
+  }
+  @media (max-width: 1199px) {
+    .bnr_cnct {
+      padding-left: 0;
+      width: 570px;
+    }
+    .bnnr_sec {
+      background-size: cover;
+      background-position: bottom left calc(50% - 160px);
+    }
+    .btm_anim_wrp {
+      display: none;
+    }
+  }
+  @media (max-width: 991px) {
+    .bnr_cnct {
+      width: 100%;
+      text-align: center;
+      padding-bottom: 70px;
+      position: relative;
+    }
+    .bnr_cnct::before {
+      position: absolute;
+      content: "";
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 0;
+      width: 360px;
+      height: 360px;
+      background: url(../../assets/images/mob_bnnrly.png) no-repeat bottom center/ contain;
+    }
+    .bnnr_bttns {
+      justify-content: center;
+      gap: 20px;
+    }
+    .bnnr_txts {
+      position: relative;
+    }
+    .bnnr_sec h2 {
+      font-size: 16px;
+      line-height: 1.6;
+      letter-spacing: 0.16em;
+      margin-bottom: 10px;
+    }
+    .bnnr_sec h1 {
+      margin-bottom: 20px;
+    }
+    .bnnr_sec h1 span {
+      display: block;
+    }
+    .bnnr_sec p {
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .bnnr_sec {
+      padding: 20px 0;
+      background-position: top center;
+    }
+    .bnnr_bttns{
+      gap: 12px;
+    }
+    .bnnr_bttns a{
+      padding: 0 12px;
+    }
+    .bbnr_mons{
+      margin-bottom: -275px;
+    }
+  }
+</style>

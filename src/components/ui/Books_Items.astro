@@ -1,0 +1,25 @@
+---
+import SellerPlatforms from '../global/SellerPlatforms.astro';
+import BooksCard from '../global/BooksCard.astro';
+
+const { class: className = '', ...props } = Astro.props;
+---
+
+
+<div class="books_itm_wrp">
+    <BooksCard {...props} />
+    <SellerPlatforms {...props} />
+</div>
+
+
+<style>
+    .books_itm_wrp + .books_itm_wrp{
+        margin-top: 120px;
+    }
+
+    @media (max-width: 767px)  {
+        .books_itm_wrp + .books_itm_wrp{
+            margin-top: 70px;
+        }
+    }
+</style>

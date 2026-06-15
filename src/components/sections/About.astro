@@ -1,0 +1,153 @@
+---
+import { Image } from 'astro:assets';
+import BaseButton  from '../ui/BaseButton.astro';
+import leftHams from '../../assets/images/abthams_lft.png';
+import rightHams from '../../assets/images/abthams_rgt.png';
+import pipImg from '../../assets/images/abthams_pip.png';
+
+interface Props {
+  abt_title?: string;
+  abt_para?: {
+    text: string;
+    highlight: string;
+  };
+  abt_btn?: {
+    text: string;
+    link: string;
+  };
+}
+
+const {
+  abt_title = "about",
+  abt_para = {
+    text: "This is an evergreen classic programming book, focused on foundational principles rather than expiring knowledge trends. We feel 10 bucks is a fair price per digital volume and we don't do sales.",
+    highlight:
+      "It's a great deal, anytime! Feel free to buy the book now, or later, or whenever. The book will still be relevant, though you might encounter the monsters sooner…",
+  },
+  abt_btn = {
+    text: "Vol. 1 Free Sample",
+    link: "https://kevinfocke.com/The-Code-Monster-Manual-Vol-1-Sample.pdf",
+  },
+}: Props = Astro.props;
+---
+
+<section class="about-section" id="about_sec">
+  <div class="container">
+    <h2>{abt_title}</h2>
+    <p>{abt_para.text} <span>{abt_para.highlight}</span></p>
+    <BaseButton  href={abt_btn.link} variant="primary" text={abt_btn.text} target="_blank"/>
+  </div>
+  <div class="about-images">
+    <Image src={leftHams} alt="The Code Monster mascot, left" loading="eager" />
+    <Image src={pipImg} alt="pipe" aria-hidden="true" class="about-pipe" loading="eager" />
+    <Image src={rightHams} alt="The Code Monster mascot, right" loading="eager" />
+  </div>
+</section>
+
+<style >
+  .about-section {
+    padding: 70px 0 100px;
+    background: linear-gradient(180deg, var(--color-crimson-0) 0%, var(--color-crimson-40) 60%);
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .about-section h2 {
+    color: var(--color-accent-orange);
+    font-size: 25px;
+    font-weight: 300;
+    line-height: 29px;
+    letter-spacing: 0.3em;
+    margin-bottom: 25px;
+  }
+
+  .about-section p {
+    font-size: 39px;
+    font-weight: 700;
+    line-height: 52px;
+    text-transform: uppercase;
+    color: var(--color-text);
+    font-family: var(--font-secondary);
+    max-width: 1040px;
+    margin: 0 auto 35px;
+  }
+
+  .about-section p span {
+    color: var(--color-accent-orange);
+    display: inline;
+  }
+
+  .about-section .about-images {
+    margin-top: -200px;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .about-section .about-pipe {
+    width: 0;
+    flex-grow: 1;
+    height: 20px;
+    margin-bottom: 7px;
+  }
+
+  .about-section .about-images img:not(.about-pipe) {
+    width: 500px;
+  }
+
+  /* ── Responsive ──────────────────────────────────────────────── */
+  @media (min-width: 1600px) {
+    .about-section .about-images {
+      margin-top: -350px;
+    }
+
+    .about-section .about-pipe {
+      height: 24px;
+    }
+
+    .about-section .about-images img:not(.about-pipe) {
+      width: 600px;
+    }
+  }
+
+    @media (max-width: 1199px) {
+      .about-section .about-images img:not(.about-pipe) {
+          width: 300px;
+      }
+      .about-section p {
+          font-size: 30px;
+          line-height: 40px;
+      }
+      .about-section .about-images{
+        margin-top: -140px;
+      }
+      .about-section .about-pipe {
+          height: 12px;
+          margin-bottom: 4px;
+      }
+    }
+
+    @media (max-width: 767px)  {
+      .about-section{
+      padding: 40px 0;
+    }
+    .about-section h2{
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+      .about-section p {
+          font-size: 20px;
+          line-height: 30px;
+      }
+      .about-section .about-images img:not(.about-pipe) {
+          width: 170px;
+      }
+      .about-section .about-images {
+          margin-top: -60px;
+      }
+      .about-section .about-pipe {
+          height: 6.5px;
+          margin-bottom: 2px;
+      }
+    }
+</style>

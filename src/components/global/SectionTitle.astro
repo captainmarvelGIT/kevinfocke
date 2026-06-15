@@ -1,0 +1,28 @@
+---
+interface Props {
+  heading?: string;
+  body?: string;
+}
+
+const {
+  heading = 'EXPLORE Different Concepts',
+  body = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum urna magna, aliquet nec rutrum vel, viverra et est. In vitae ipsum non enim fermentum.',
+} = Astro.props;
+---
+
+<div class="section-title">
+  <h2>{heading}</h2>
+  <p>{body}</p>
+</div>
+
+<style>
+  .section-title {
+    text-align: center;
+  }
+
+  .section-title p {
+    max-width: 780px;
+    margin: 10px auto 0;
+  }
+
+</style>

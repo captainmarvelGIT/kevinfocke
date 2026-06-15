@@ -1,0 +1,77 @@
+---
+import FooterTop from "../ui/FooterTop.astro";
+import FooterBottom from "../ui/FooterBottom.astro";
+---
+
+<footer class="site-footer">
+  <FooterTop />
+  <FooterBottom />
+</footer>
+
+<style>
+  .site-footer {
+    padding: 25px 0 40px;
+    border-top: 1px solid var(--color-white-10);
+  }
+
+  .site-footer :global(.footer-top .container) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 20px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+
+  .site-footer :global(.footer-bottom) {
+    border-top: 1px solid var(--color-white-10);
+    text-align: center;
+    padding-top: 20px;
+    margin-top: 20px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .site-footer :global(.icon-group) {
+    vertical-align: middle;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* ── Responsive ──────────────────────────────────────────────── */
+
+  @media (max-width: 991px) {
+    .site-footer {
+      padding: 0 0 20px;
+    }
+    .site-footer :global(.footer-top .container) {
+      font-size: 14px;
+      flex-direction: column;
+      padding-bottom: 10px;
+      gap: 12px;
+    }
+  }
+  @media (max-width: 767px) {
+    .site-footer :global(.footer-top .container) {
+      padding-bottom: 6px;
+      padding-top: 6px;
+    }
+    .site-footer :global(.footer-top .container a) {
+      width: 200px;
+    }
+    .site-footer :global(.footer-bottom) {
+      font-size: 10px;
+      padding-top: 16px;
+      margin-top: 12px;
+    }
+    .site-footer :global(.icon-group) {
+      gap: 2px;
+    }
+    .site-footer :global(.icon-group img) {
+      width: 16px;
+    }
+  }
+</style>

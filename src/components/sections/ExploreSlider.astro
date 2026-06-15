@@ -1,0 +1,24 @@
+---
+import SectionTitle from '../global/SectionTitle.astro';
+import ConceptSlider from '../global/ConceptSlider.astro';
+---
+
+<section class="explore-slider">
+  <div class="container">
+    <SectionTitle />
+    <ConceptSlider />
+  </div>
+</section>
+
+<style >
+  .explore-slider {
+    padding: 70px 0 30px;
+    background: linear-gradient(0deg, var(--color-crimson-0) 0%, var(--color-crimson-40) 60%);
+  }
+
+  @media(max-width:767px){
+    .explore-slider{
+      padding: 20px 0 10px;
+    }
+  }
+</style>

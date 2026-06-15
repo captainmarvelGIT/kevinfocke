@@ -1,0 +1,69 @@
+---
+import booksVol1 from '../../assets/images/books_sec2.png';
+import BooksItems from '../ui/Books_Items.astro';
+
+const vol1Props = {
+  class: 'books_sl_sec_2',
+  code_monst_book: booksVol1,
+  books_title: 'Processors And Tangled Threads',
+  book_sec_title: 'Code Monster Manual Vol. 1',
+  books_para_lft: {
+    title: 'What programmer should know about processors.',
+    paras: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  },
+  books_para_rgt: {
+    title: 'Get to know more about workflow',
+    paras: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  },
+  books_app_cap:
+    'This is an evergreen classic programming book, focused on foundational principles rather than expiring knowledge trends.',
+
+    platformLinks: {
+    pdf: 'https://kevinfocke.com/The-Code-Monster-Manual-Vol-1-Sample.pdf',
+    kindle: 'https://www.amazon.com/Code-Monster-Manual-Processors-Tangled-ebook/dp/B0GR6LCSGT?utm_source=kevinfocke',
+    leanpub: 'https://leanpub.com/the-code-monster-manual-vol-1?utm_source=kevinfocke',
+    appleBooks: 'https://books.apple.com/us/book/the-code-monster-manual/id6760037851?utm_source=kevinfocke',
+    playBooks: 'https://play.google.com/store/books/details?id=yW3GEQAAQBAJ&utm_source=kevinfocke',
+    kobo: 'https://www.kobo.com/ww/en/ebook/the-code-monster-manual-1?utm_source=kevinfocke',
+    bn: 'https://www.barnesandnoble.com/w/the-code-monster-manual-kevin-focke/1149618684?utm_source=kevinfocke',
+  },
+};
+---
+
+<section class="books-section" id="book_card_sec">
+  <div class="container">
+    <BooksItems />
+    <BooksItems {...vol1Props}  />
+  </div>
+</section>
+
+<style>
+  .books-section {
+    padding: 100px 0 40px;
+    /* background: linear-gradient(180deg, var(--color-blue-0) 20%, var(--color-blue-20) 100%); */
+    background: linear-gradient(
+      180deg,
+      rgba(var(--color-accent-blue), 0) 15%,
+      rgba(var(--color-accent-blue), 0.2) 35%,
+      rgba(var(--color-accent-blue), 0.5) 70%,
+      rgba(var(--color-accent-blue), 0) 100%
+    );
+  }
+
+  /* ── Variant: Vol. 1 ─────────────────────────────────────── */
+  .books-section.books_sl_sec_2 {
+    background: linear-gradient(
+      180deg,
+      var(--color-blue-20) 28%,
+      var(--color-blue-40) 80%,
+      var(--color-blue-0) 100%
+    );
+  }
+
+  @media(max-width: 767px){
+    .books-section {
+        padding: 40px 0 20px;
+    }
+  }
+
+</style>

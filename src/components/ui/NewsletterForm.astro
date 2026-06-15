@@ -1,0 +1,330 @@
+---
+import BaseButton from "../ui/BaseButton.astro";
+import BaseInput from "../ui/BaseInput.astro";
+
+interface fromlabels {
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+}
+
+interface Props {
+  labels?: fromlabels;
+}
+
+const {
+    labels = {
+        firstName: "First Name",
+        lastName: "Last Name",
+        email: "Email Address",
+    },
+} = Astro.props;
+---
+
+<form
+    id="newsletter-form"
+    novalidate
+    aria-label="Newsletter signup form"
+    aria-live="polite"
+>
+    <div class="form-fields">
+        <div class="field-wrap">
+            <label for="first-name" class="sr-only">{labels.firstName}</label>
+            <BaseInput
+                id="first-name"
+                name="firstName"
+                type="text"
+                placeholder={labels.firstName}
+                autocomplete="given-name"
+                aria-required="true"
+                aria-describedby="first-name-error"
+            />
+            <span
+                class="field-error"
+                id="first-name-error"
+                role="alert"
+                aria-atomic="true"></span>
+        </div>
+
+        <div class="field-wrap">
+            <label for="last-name" class="sr-only">{labels.lastName}</label>
+            <BaseInput
+                id="last-name"
+                name="lastName"
+                type="text"
+                placeholder={labels.lastName}
+                autocomplete="family-name"
+                aria-required="true"
+                aria-describedby="last-name-error"
+            />
+            <span
+                class="field-error"
+                id="last-name-error"
+                role="alert"
+                aria-atomic="true"></span>
+        </div>
+
+        <div class="field-wrap">
+            <label for="email" class="sr-only">{labels.email}</label>
+            <BaseInput
+                id="email"
+                name="email"
+                type="email"
+                placeholder={labels.email}
+                autocomplete="email"
+                aria-required="true"
+                aria-describedby="email-error"
+            />
+            <span
+                class="field-error"
+                id="email-error"
+                role="alert"
+                aria-atomic="true"></span>
+        </div>
+        <div class="submit-wrap">
+            <span
+                class="form-success"
+                id="form-success"
+                role="status"
+                aria-atomic="true"></span>
+            <BaseButton variant="primary" text="SUBMIT" />
+        </div>
+    </div>
+</form>
+
+<script>
+    // ── Helpers ────────────────────────────────────────────────
+    // Domain must have a proper TLD of 2–10 real letters (blocks ww.pp, a.bc, etc.)
+    const EMAIL_RE =
+        /^[^\s@]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,10}$/;
+    // Only letters (including accented) — no digits, symbols, or @
+    const NAME_CHARS_RE = /^[A-Za-zÀ-ÖØ-öø-ÿ' -]+$/;
+
+    function getEl<T extends HTMLElement>(id: string): T {
+        return document.getElementById(id) as T;
+    }
+
+    function showError(
+        errorEl: HTMLElement,
+        input: HTMLElement,
+        message: string,
+    ) {
+        errorEl.textContent = message;
+        errorEl.classList.add("visible");
+        input.classList.add("input-error");
+        input.setAttribute("aria-invalid", "true");
+    }
+
+    function clearError(errorEl: HTMLElement, input: HTMLElement) {
+        errorEl.textContent = "";
+        errorEl.classList.remove("visible");
+        input.classList.remove("input-error");
+        input.setAttribute("aria-invalid", "false");
+    }
+
+    // ── Rules ──────────────────────────────────────────────────
+    type Rule = { test: (v: string) => boolean; message: string };
+
+    const rules: Record<string, Rule[]> = {
+        firstName: [
+            {
+                test: (v) => v.trim().length > 0,
+                message: "First name is required.",
+            },
+            {
+                test: (v) => NAME_CHARS_RE.test(v.trim()),
+                message:
+                    "First name can only contain letters — no numbers or symbols.",
+            },
+            {
+                test: (v) => v.trim().length >= 2,
+                message: "First name must be at least 2 characters.",
+            },
+            {
+                test: (v) => v.trim().length <= 50,
+                message: "First name must be 50 characters or fewer.",
+            },
+        ],
+        lastName: [
+            {
+                test: (v) => v.trim().length > 0,
+                message: "Last name is required.",
+            },
+            {
+                test: (v) => NAME_CHARS_RE.test(v.trim()),
+                message:
+                    "Last name can only contain letters — no numbers or symbols.",
+            },
+            {
+                test: (v) => v.trim().length >= 2,
+                message: "Last name must be at least 2 characters.",
+            },
+            {
+                test: (v) => v.trim().length <= 50,
+                message: "Last name must be 50 characters or fewer.",
+            },
+        ],
+        email: [
+            {
+                test: (v) => v.trim().length > 0,
+                message: "Email address is required.",
+            },
+            { test: (v) => v.includes("@"), message: "Email must contain @." },
+            {
+                test: (v) => EMAIL_RE.test(v.trim()),
+                message: "Enter a valid email — e.g. name@example.com.",
+            },
+        ],
+    };
+
+    function validateField(
+        input: HTMLInputElement,
+        errorEl: HTMLElement,
+    ): boolean {
+        const fieldRules = rules[input.name] ?? [];
+        for (const rule of fieldRules) {
+            if (!rule.test(input.value)) {
+                showError(errorEl, input, rule.message);
+                return false;
+            }
+        }
+        clearError(errorEl, input);
+        return true;
+    }
+
+    // ── Wire up ────────────────────────────────────────────────
+    document.addEventListener("DOMContentLoaded", () => {
+        const form = getEl<HTMLFormElement>("newsletter-form");
+        const firstNameEl = getEl<HTMLInputElement>("first-name");
+        const lastNameEl = getEl<HTMLInputElement>("last-name");
+        const emailEl = getEl<HTMLInputElement>("email");
+        const successEl = getEl<HTMLElement>("form-success");
+
+        const pairs: Array<[HTMLInputElement, HTMLElement]> = [
+            [firstNameEl, getEl("first-name-error")],
+            [lastNameEl, getEl("last-name-error")],
+            [emailEl, getEl("email-error")],
+        ];
+
+        // Validate on blur (after the user leaves a field)
+        pairs.forEach(([input, errorEl]) => {
+            input.addEventListener("blur", () => validateField(input, errorEl));
+            // Clear error as user starts correcting
+            input.addEventListener("input", () => {
+                if (input.classList.contains("input-error")) {
+                    clearError(errorEl, input);
+                }
+            });
+        });
+
+        // Full validation on submit
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            successEl.textContent = "";
+            successEl.classList.remove("visible");
+
+            const allValid = pairs.every(([input, errorEl]) =>
+                validateField(input, errorEl),
+            );
+
+            if (!allValid) {
+                // Focus the first invalid field
+                const firstInvalid = pairs.find(([input]) =>
+                    input.classList.contains("input-error"),
+                );
+                firstInvalid?.[0].focus();
+                return;
+            }
+
+            // ── Success state ──────────────────────────────────────
+            // Replace this block with your real API call / form submission.
+            successEl.textContent =
+                "Form submitted successfully! You’re now subscribed";
+            successEl.classList.add("visible");
+            form.reset();
+            pairs.forEach(([input, errorEl]) => clearError(errorEl, input));
+            setTimeout(() => {
+                successEl.classList.remove("visible");
+                successEl.textContent = "";
+            }, 5000);
+        });
+    });
+</script>
+
+<style>
+    /* ── Screen-reader only ─────────────────────────────────── */
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+    /* ── Fields ─────────────────────────────────────────────── */
+    .form-fields {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        justify-content: center;
+        margin-top: 25px;
+    }
+
+    .field-wrap {
+        position: relative;
+    }
+    /* ── Inline error message ───────────────────────────────── */
+    .field-error {
+        display: none;
+        position: absolute;
+        bottom: -22px;
+        left: 10px;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--color-accent-orange);
+        line-height: 1.3;
+    }
+
+    .field-error.visible {
+        display: block;
+    }
+
+    /* ── Error state on the input itself ────────────────────── */
+    :global(.form-input.input-error) {
+        border-color: var(--color-accent-orange);
+    }
+    /* ── Success message ────────────────────────────────────── */
+    .form-success {
+        display: none;
+        font-size: 16px;
+        font-weight: 400;
+        color: var(--color-text);
+        margin-bottom: 8px;
+    }
+
+    .form-success.visible {
+        display: block;
+    }
+
+    /* ── Submit row ─────────────────────────────────────────── */
+    .submit-wrap {
+        text-align: center;
+    }
+
+    @media (max-width: 767px) {
+        .form-fields {
+            gap: 24px;
+        }
+        .field-error {
+            bottom: -17px;
+            left: 5px;
+            font-size: 12px;
+        }
+        .submit-wrap .btn {
+            min-width: 140px;
+        }
+    }
+</style>

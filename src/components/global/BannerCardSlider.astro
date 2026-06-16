@@ -19,9 +19,7 @@ const slides = [
       {slides.map((slide) => (
         <div class="swiper-slide">
           <div class="slide-card">
-            {/* <a href={slide.href} target={slide.href.startsWith('http') ? '_blank' : undefined}> */}
               <Image src={slide.image} alt={slide.text} loading="eager" fetchpriority="high"/>
-              {/* </a> */}
           </div>
         </div>
       ))}

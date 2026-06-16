@@ -1,6 +1,5 @@
 /* ============================================================
-   CSS CUSTOM PROPERTIES (Design Tokens)
-   All hardcoded values centralised here.
+   CSS CUSTOM PROPERTIES
    ============================================================ */
 
 :root {
@@ -13,7 +12,6 @@
   --color-accent-purple: #c63eff;
   /* --color-accent-blue: #3199db; */
   --color-accent-blue: 49, 153, 219;
-
   --color-accent-crimson: #be123c;
 
   /* ── Neutral / base ─────────────────────────────────────── */

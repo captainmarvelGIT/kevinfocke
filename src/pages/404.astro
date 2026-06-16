@@ -21,7 +21,7 @@ const {
 }: Props = Astro.props;
 ---
 
-<BaseLayout title="Home | Kevin Focke">
+<BaseLayout title="Error 404 | Kevin Focke">
     <div class="error_wrp">
         <h1>{not_found_title}</h1>
         <h2>{not_found_subtitle}</h2>
@@ -43,5 +43,8 @@ const {
         justify-content: center;
         flex-direction: column;
         gap: 40px;
+    }
+    @media (max-width: 991px)  {
+        min-height: calc(100vh - 170px);
     }
 </style>

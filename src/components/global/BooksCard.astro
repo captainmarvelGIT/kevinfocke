@@ -1,0 +1,49 @@
+---
+import { Picture } from 'astro:assets';
+import defaultBookImage from '../../assets/images/books_sec1.png';
+
+interface BooksPara {
+  title: string;
+  paras: string;
+}
+
+interface Props {
+  code_monst_book?: ImageMetadata;
+  books_title?: string;
+  book_sec_title?: string;
+  books_para_lft?: BooksPara;
+  books_para_rgt?: BooksPara;
+}
+
+const {
+  code_monst_book = defaultBookImage,
+  books_title = 'Escape From Number Hell',
+  book_sec_title = 'Code Monster Manual Vol. 0',
+  books_para_lft = {
+    title: 'Computer fundamentals, the book I wish I had.',
+    paras: 'The creative glue for intermediatelevel programming concepts.',
+  },
+  books_para_rgt = {
+    title: 'Improve your programming versatility',
+    paras: 'By learning the nuances of numbers & their representations. ',
+  },
+} = Astro.props;
+---
+
+<div class="books-card">
+  <h4>{books_title}</h4>
+  <h2><span>THE</span> {book_sec_title}</h2>
+  <div class="sec-book">
+    <Picture src={code_monst_book} alt={book_sec_title} formats={['avif', 'webp']} />
+  </div>
+  <div class="books-funda-wrap">
+    <div class="books-funda-left">
+      <h6>{books_para_lft.title}</h6>
+      <p>{books_para_lft.paras}</p>
+    </div>
+    <div class="books-funda-right">
+      <h6>{books_para_rgt.title}</h6>
+      <p>{books_para_rgt.paras}</p>
+    </div>
+  </div>
+</div>

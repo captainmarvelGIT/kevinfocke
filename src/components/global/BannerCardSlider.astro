@@ -1,0 +1,80 @@
+---
+import { Picture } from "astro:assets";
+
+import banner_stars from "../../assets/icons/strs_grp.png";
+
+import slide1 from "../../assets/images/bnnr_sldr_card_1.png";
+import slide2 from "../../assets/images/bnnr_sldr_card_2.png";
+import slide3 from "../../assets/images/bnnr_sldr_card_3.png";
+
+const slides = [
+  { image: slide1, text: "book 1" },
+  { image: slide2, text: "book 2" },
+  { image: slide3, text: "book 3" },
+];
+---
+
+<div class="banner-slider-wrap">
+  <div class="swiper banner_card_slider">
+    <div class="swiper-wrapper">
+      {
+        slides.map((slide) => (
+          <div class="swiper-slide">
+            <div class="slide-card">
+              <Picture
+                src={slide.image}
+                alt={slide.text}
+                formats={["avif", "webp"]}
+                widths={[450]}
+                sizes="450px"
+                loading="eager"
+              />
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="bnnr_strs">
+    <Picture
+      src={banner_stars}
+      alt="stars group"
+      formats={["avif", "webp"]}
+      loading="eager"
+    />
+  </div>
+</div>
+
+<script>
+  async function initBannerSlider() {
+    // ✅ Load from public folder - no CDN needed
+    await new Promise<void>((resolve) => {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = 'swiper/swiper.min.css';
+      link.onload = () => resolve();
+      document.head.appendChild(link);
+    });
+
+    const [{ default: Swiper }, { EffectCards }] = await Promise.all([
+      import("swiper"),
+      import("swiper/modules"),
+    ]);
+
+    new Swiper(".banner_card_slider", {
+      modules: [EffectCards],
+      effect: "cards",
+      grabCursor: true,
+      loop: false,
+      speed: 400,
+      cardsEffect: {
+        perSlideOffset: 8,
+        perSlideRotate: 6,
+        slideShadows: false,
+      },
+    });
+  }
+
+  window.addEventListener("load", initBannerSlider);
+</script>

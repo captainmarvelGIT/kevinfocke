@@ -1,0 +1,71 @@
+---
+import { Picture } from 'astro:assets';
+
+import pdfIcon from '../../assets/icons/pdf.png';
+import kindleIcon from '../../assets/icons/kindle.png';
+import leanpubIcon from '../../assets/icons/leanpub.png';
+import appleBooksIcon from '../../assets/icons/apple-books.png';
+import playBooksIcon from '../../assets/icons/google-play-books.png';
+import koboIcon from '../../assets/icons/kobo.png';
+import bnIcon from '../../assets/icons/barnes-noble.png';
+
+interface Platform {
+  name: string;
+  icon: ImageMetadata;
+  href: string;
+}
+
+interface Props {
+  books_app_cap?: string;
+  platformLinks?: {
+    pdf?: string;
+    kindle?: string;
+    leanpub?: string;
+    appleBooks?: string;
+    playBooks?: string;
+    kobo?: string;
+    bn?: string;
+  };
+}
+
+const {
+  books_app_cap = "The book I wish I had. Improve your low-level programming by learning the nuances of numbers & their representation. Not a math wizard? No problem!",
+    platformLinks = {
+    pdf: 'https://kevinfocke.com/The-Code-Monster-Manual-Vol-0-Sample.pdf',
+    kindle: 'https://www.amazon.com/Code-Monster-Manual-Numbers-Abstraction-ebook/dp/B0DSLM5YKR?utm_source=kevinfocke',
+    leanpub: 'https://leanpub.com/the-code-monster-manual-vol-0?utm_source=kevinfocke',
+    appleBooks: 'https://books.apple.com/us/book/the-code-monster-manual/id6740335581?utm_source=kevinfocke',
+    playBooks: 'https://play.google.com/store/books/details?id=0Zo9EQAAQBAJ&utm_source=kevinfocke',
+    kobo: 'https://www.kobo.com/ww/en/ebook/the-code-monster-manual?utm_source=kevinfocke',
+    bn: 'https://www.barnesandnoble.com/w/the-code-monster-manual-kevin-focke/1147459519?utm_source=kevinfocke',
+  },
+} = Astro.props;
+
+const platforms: Platform[] = [
+  { name: 'PDF', icon: pdfIcon, href: platformLinks.pdf ?? '#' },
+  { name: 'Kindle', icon: kindleIcon, href: platformLinks.kindle ?? '#' },
+  { name: 'Leanpub', icon: leanpubIcon, href: platformLinks.leanpub ?? '#' },
+  { name: 'Apple Books', icon: appleBooksIcon, href: platformLinks.appleBooks ?? '#' },
+  { name: 'Google Play Books', icon: playBooksIcon, href: platformLinks.playBooks ?? '#' },
+  { name: 'Rakuten Kobo', icon: koboIcon, href: platformLinks.kobo ?? '#' },
+  { name: 'Barnes & Noble', icon: bnIcon, href: platformLinks.bn ?? '#' },
+];
+---
+
+<div class="seller-platforms">
+  <ul class="platforms-grid" role="list">
+    {platforms.map((platform) => (
+      <li>
+        <a
+          href={platform.href}
+          aria-label={`Buy on ${platform.name}`}
+          target={platform.href.startsWith('http') ? '_blank' : undefined}
+          rel={platform.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+        >
+          <Picture src={platform.icon} formats={['avif', 'webp']} alt={platform.name} />
+        </a>
+      </li>
+    ))}
+  </ul>
+  <p class="platform-caption">{books_app_cap}</p>
+</div>

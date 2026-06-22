@@ -1,0 +1,24 @@
+---
+import { Picture } from 'astro:assets';
+import SectionTitle from '../global/SectionTitle.astro';
+import NewsletterForm from '../ui/NewsletterForm.astro';
+import formLogo from '../../assets/images/frmlogo.png';
+import formCover from '../../assets/images/form_cvr_crtn.png';
+---
+
+<section class="contact-section" id="contact_section">
+  <div class="container">
+    <div class="contact-form-wrap">
+      <div class="form-logo-wrap">
+        <Picture  src={formLogo} alt="Code Monster logo"  formats={['avif', 'webp']} />
+      </div>
+      <SectionTitle
+        heading="Newsletter Signup"
+        body="Praesent auctor interdum accumsan. Nunc porttitor malesuada purus non mattis. Morbi dapibus, eros pretium condimentum mattis." />
+        <NewsletterForm />
+    </div>
+    <div class="form-cartoon">
+        <Picture src={formCover} alt="form-cartoon" formats={['avif', 'webp']} aria-hidden="true" widths={[480, 800, 1200, 1547]} sizes="(max-width: 767px) 480px, (max-width: 1900px) 800px, 1547px" />
+    </div>
+  </div>
+</section>

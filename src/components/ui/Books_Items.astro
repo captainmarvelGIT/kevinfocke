@@ -1,0 +1,12 @@
+---
+import SellerPlatforms from '../global/SellerPlatforms.astro';
+import BooksCard from '../global/BooksCard.astro';
+
+const { class: className = '', ...props } = Astro.props;
+---
+
+
+<div class="books_itm_wrp">
+    <BooksCard {...props} />
+    <SellerPlatforms {...props} />
+</div>

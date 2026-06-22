@@ -1,0 +1,50 @@
+---
+import { Picture, getImage } from 'astro:assets';
+import BaseButton  from '../ui/BaseButton.astro';
+import defaultVolImg from '../../assets/images/volsc_img.png';
+import defaultVolBg from '../../assets/images/volsc_bg.png';
+
+interface Props {
+  Volsecimg?: ImageMetadata;
+  Volsecbg?: ImageMetadata;
+  vol_subtitle?: string;
+  vol_title?: string;
+  vol_para?: string;
+  vol_link?: string;
+}
+
+const {
+  Volsecimg = defaultVolImg,
+  Volsecbg = defaultVolBg,
+  vol_subtitle = 'Code Monster Manual Vol. 2',
+  vol_title = 'Coming Soon',
+  vol_para = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempor nulla. Nam risus dui, rhoncus id orci in, pellentesque viverra quam. Sed congue laoreet tortor, in egestas metus imperdiet quis. Quisque a neque ut sem egestas rutrum eget a orci. Vestibulum quis erat vel lorem consequat pretium. Pellentesque non accumsan turpis. Pellentesque est nunc, imperdiet tincidunt tellus sit amet, luctus fringilla risus. Phasellus sit amet nulla non eros elementum ultricies in nec velit.',
+} = Astro.props;
+
+const optimizedVolBg = await getImage({
+  src: Volsecbg,
+  format: 'avif',
+  width: 1601,
+});
+---
+
+<section class="volume-section">
+  <div class="container">
+    <div class="volume-wrap">
+      <div
+        class="volume-inner"
+        style={`background-image: url(${optimizedVolBg.src});`}
+      >
+        <div class="volume-content">
+          <h4>{vol_subtitle}</h4>
+          <h2>{vol_title}</h2>
+          <p>{vol_para}</p>
+          <BaseButton variant="primary" text="READ FREE SAMPLE" onclick="document.getElementById('contact_section')?.scrollIntoView({ behavior: 'smooth' })" />
+        </div>
+        <div class="volume-image">
+          <Picture src={Volsecimg} alt={vol_title} formats={['avif', 'webp']}/>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

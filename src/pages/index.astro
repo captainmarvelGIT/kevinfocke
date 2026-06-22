@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Banner from '../components/sections/Banner.astro';
+import About from '../components/sections/About.astro';
+import ExploreSlider from '../components/sections/ExploreSlider.astro';
+import CardSection from '../components/sections/CardSection.astro';
+import VolumeSection from '../components/sections/VolumeSection.astro';
+import ContactForm from '../components/sections/ContactForm.astro';
+---
+
+<BaseLayout
+  title="Home | Kevin Focke"
+  description="The Code Monster Manual — an evergreen series of programming books teaching foundational principles instead of expiring trends."
+>
+  <Banner />
+  <About />
+  <ExploreSlider />
+  <CardSection />
+  <VolumeSection />
+  <ContactForm />
+</BaseLayout>

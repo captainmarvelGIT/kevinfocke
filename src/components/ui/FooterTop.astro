@@ -1,0 +1,19 @@
+---
+interface Props {
+  name?: string;
+  rightsText?: string;
+}
+
+const { name = 'Kevin Focke', rightsText = 'All Rights Reserved.' } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<div class="footer-top">
+  <div class="container">
+    <a href="/" aria-label="Kevin Focke – home" class="logo">
+      <span>Kevin Focke [fˈa͡ʊlki]</span>
+    </a>
+    </a>
+    <p>© {year} {name}. {rightsText}</p>
+  </div>
+</div>

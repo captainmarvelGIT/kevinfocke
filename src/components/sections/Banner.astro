@@ -1,0 +1,95 @@
+---
+import { Picture, getImage } from "astro:assets";
+import BaseButton from "../ui/BaseButton.astro";
+import AnimatedCircle from "../ui/AnimatedCircle.astro";
+import monster2 from "../../assets/images/bnnr_mons_2.png";
+import bannerBgnw from "../../assets/images/bnnr_nw.png";
+import BannerCardSlider from "../global/BannerCardSlider.astro";
+
+interface Props {
+  bnnr_title?: string;
+  bnnr_subtitle?: string;
+  bnnr_highlight?: string;
+  bnnr_desc?: string;
+  banner_btn1?: {
+    text: string;
+    link: string;
+  };
+  banner_btn2?: {
+    text: string;
+    link: string;
+  };
+}
+
+const {
+  bnnr_subtitle = "LEARN BACKEND PROGRAMMING THROUGH",
+  bnnr_title = "The Code",
+  bnnr_highlight = "Monster Manual",
+  bnnr_desc = "Aliquam eu sem maximus, tincidunt tortor eget, vulputate lacus. Nulla in lorem rhoncus, vestibulum nulla et, efficitur risus.",
+  banner_btn1 = {
+    text: "Vol. 0 Free Sample",
+    link: "https://kevinfocke.com/The-Code-Monster-Manual-Vol-0-Sample.pdf",
+  },
+  banner_btn2 = {
+    text: "Buy Books Now!",
+    link: "book_card_sec",
+  },
+}: Props = Astro.props;
+---
+
+<section class="bnnr_sec">
+  <div class="bnnr_bg">
+    <Picture
+      src={bannerBgnw}
+      alt="The Code Monster mascot"
+      priority={true}
+      formats={["avif", "webp"]}
+      widths={[1920]}
+    />
+  </div>
+  <div class="container">
+    <div class="bnnr_sec_cnctwrp">
+      <div class="bnr_cnct">
+        <div class="bbnr_mons">
+          <Picture
+            src={monster2}
+            alt="The Code Monster mascot"
+            priority={true}
+            formats={["avif", "webp"]}
+            widths={[300, 450, 589]}
+            sizes="(max-width: 767px) 280px, (max-width: 1900px) 450px, 589px"
+          />
+        </div>
+        <div class="bnnr_txts">
+          <h2>{bnnr_subtitle}</h2>
+          <h1>{bnnr_title} <span>{bnnr_highlight}</span></h1>
+          <p>{bnnr_desc}</p>
+          <div class="bnnr_bttns">
+            <BaseButton
+              href={banner_btn1.link}
+              text={banner_btn1.text}
+              variant="primary"
+              target="_blank/"
+            />
+            <BaseButton
+              text={banner_btn2.text}
+              variant="secondary"
+              onclick="document.getElementById('book_card_sec')?.scrollIntoView({ behavior: 'smooth' })"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="bnnr_sldr_wrp">
+        <BannerCardSlider />
+      </div>
+    </div>
+    <div class="btm_anim_wrp">
+      <button
+        onclick="document.getElementById('about_sec')?.scrollIntoView({ behavior: 'smooth' })"
+      >
+        <span class="sr-only">Scroll to About Section</span>
+        <AnimatedCircle />
+      </button>
+    </div>
+  </div>
+</section>

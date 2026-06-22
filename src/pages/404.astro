@@ -1,0 +1,56 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import BaseButton from "../components/ui/BaseButton.astro";
+
+interface Props {
+    not_found_title?: string;
+    not_found_subtitle?: string;
+    not_found_btn?: {
+        text: string;
+        link: string;
+    };
+}
+
+const {
+    not_found_title = "404",
+    not_found_subtitle = "page not found",
+    not_found_btn = {
+        text: "go back home",
+        link: "/",
+    },
+}: Props = Astro.props;
+---
+
+<BaseLayout
+    title="Error 404 | Kevin Focke"
+    description="The page you're looking for couldn't be found."
+    noindex={true}
+>
+    <div class="error_wrp">
+        <h1>{not_found_title}</h1>
+        <h2>{not_found_subtitle}</h2>
+        <BaseButton
+            href={not_found_btn.link}
+            text={not_found_btn.text}
+            variant="primary"
+        />
+    </div>
+</BaseLayout>
+
+<style>
+    .error_wrp {
+        min-height: calc(100vh - 240px);
+        padding-top: 100px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 40px;
+    }
+    @media (max-width: 991px)  {
+        .error_wrp{
+            min-height: calc(100vh - 170px);
+        }
+    }
+</style>

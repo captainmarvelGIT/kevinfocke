@@ -1,0 +1,74 @@
+---
+import Header from '../components/global/Header.astro';
+import Footer from '../components/global/Footer.astro';
+import '../styles/variables.css';
+import '../styles/fonts.css';
+import '../styles/global.css';
+import '../styles/components.css';
+import fab from '../../public/fabic.png';
+import ogimg from '../assets/images/logo.png'
+
+import OswaldRegular from '../assets/fonts/Oswald-Regular.woff2?url';
+import RobotoRegular from '../assets/fonts/Roboto-Regular.woff2?url';
+import OswaldBold from '../assets/fonts/Oswald-Bold.woff2?url';
+import RobotoBold from '../assets/fonts/Roboto-Bold.woff2?url';
+
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = 'Kevin Focke',
+  description = 'The Code Monster Manual — learn backend programming fundamentals through an evergreen, foundational series of books by Kevin Focke.',
+  noindex = false,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- fonts preload-->
+    <link rel="preload" as="font" type="font/woff2" crossorigin href={OswaldRegular} />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href={RobotoRegular} />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href={OswaldBold} />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href={RobotoBold} />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href={fab.src} />
+
+    <!-- Open Graph (Social Sharing) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogimg.src} />
+    <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogimg.src} />
+  </head>
+
+  <body>
+    <Header />
+
+    <main>
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
+</html>

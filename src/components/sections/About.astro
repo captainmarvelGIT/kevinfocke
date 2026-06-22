@@ -1,0 +1,68 @@
+---
+import { Picture } from "astro:assets";
+import BaseButton from "../ui/BaseButton.astro";
+import leftHams from "../../assets/images/abthams_lft.png";
+import rightHams from "../../assets/images/abthams_rgt.png";
+import pipImg from "../../assets/images/abthams_pip.png";
+
+interface Props {
+  abt_title?: string;
+  abt_para?: {
+    text: string;
+    highlight: string;
+  };
+  abt_btn?: {
+    text: string;
+    link: string;
+  };
+}
+
+const {
+  abt_title = "about",
+  abt_para = {
+    text: "This is an evergreen classic programming book, focused on foundational principles rather than expiring knowledge trends. We feel 10 bucks is a fair price per digital volume and we don't do sales.",
+    highlight:
+      "It's a great deal, anytime! Feel free to buy the book now, or later, or whenever. The book will still be relevant, though you might encounter the monsters sooner…",
+  },
+  abt_btn = {
+    text: "Vol. 1 Free Sample",
+    link: "https://kevinfocke.com/The-Code-Monster-Manual-Vol-1-Sample.pdf",
+  },
+}: Props = Astro.props;
+---
+
+<section class="about-section" id="about_sec">
+  <div class="container">
+    <h2>{abt_title}</h2>
+    <p>{abt_para.text} <span>{abt_para.highlight}</span></p>
+    <BaseButton
+      href={abt_btn.link}
+      variant="primary"
+      text={abt_btn.text}
+      target="_blank"
+    />
+  </div>
+  <div class="about-images">
+    <Picture
+      src={leftHams}
+      alt="The Code Monster mascot, left"
+      formats={["avif", "webp"]}
+      width={744}
+      height={556} 
+    />
+    <Picture
+      src={pipImg}
+      alt="pipe"
+      aria-hidden="true"
+      class="about-pipe"
+      formats={["avif", "webp"]}
+    />
+    <Picture
+      src={rightHams}
+      alt="The Code Monster mascot, right"
+      formats={["avif", "webp"]}
+      width={744}
+      height={556} 
+    />
+  </div>
+</section>

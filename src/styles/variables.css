@@ -1,0 +1,77 @@
+/* ============================================================
+   CSS CUSTOM PROPERTIES
+   ============================================================ */
+
+:root {
+  /* ── Fonts ──────────────────────────────────────────────── */
+  --font-primary: "Roboto", sans-serif;
+  --font-secondary: "Oswald", sans-serif;
+
+  /* ── Brand colours ──────────────────────────────────────── */
+  --color-accent-orange: #ff6f00;
+  --color-accent-purple: #c63eff;
+  /* --color-accent-blue: #3199db; */
+  --color-accent-blue: 49, 153, 219;
+  --color-accent-crimson: #be123c;
+
+  /* ── Neutral / base ─────────────────────────────────────── */
+  --color-bg: #2a2a2a;
+  --color-bg-dark: #111111;
+  --color-text: #ffffff;
+  --color-text-dark: #000000;
+
+  /* ── White alpha variants ───────────────────────────────── */
+  --color-white-10: rgba(255, 255, 255, 0.1);
+  --color-white-50: rgba(255, 255, 255, 0.5);
+  --color-white-100: rgba(255, 255, 255, 1);
+
+  /* ── Orange accent (solid / alpha) ──────────────────────── */
+  --color-orange: rgba(255, 111, 0, 1);
+  --color-orange-transparent: rgba(255, 111, 0, 0);
+
+  /* ── Purple accent (solid / alpha) ──────────────────────── */
+  --color-purple: rgba(198, 62, 255, 1);
+  --color-purple-transparent: rgba(198, 62, 255, 0);
+
+  /* ── Blue accent (alpha) ─────────────────────────────────── */
+  --color-blue-0: rgba(49, 153, 219, 0);
+  --color-blue-20: rgba(49, 153, 219, 0.2);
+  --color-blue-40: rgba(49, 153, 219, 0.4);
+
+  /* ── Crimson accent (alpha) ──────────────────────────────── */
+  --color-crimson-0: rgba(190, 18, 60, 0);
+  --color-crimson-40: rgba(190, 18, 60, 0.4);
+
+  /* ── Black shadow tints ──────────────────────────────────── */
+  --color-shadow-01: rgba(0, 0, 0, 0.01);
+  --color-shadow-05: rgba(0, 0, 0, 0.05);
+  --color-shadow-09: rgba(0, 0, 0, 0.09);
+  --color-shadow-10: rgba(0, 0, 0, 0.1);
+  --color-shadow-00: rgba(0, 0, 0, 0);
+
+  /* ── Gold gradient stops (buttons / borders) ─────────────── */
+  --color-gold-1: rgba(197, 146, 40, 1);
+  --color-gold-2: rgba(182, 127, 20, 1);
+  --color-gold-3: rgba(235, 201, 101, 1);
+  --color-gold-4: rgba(253, 238, 160, 1);
+  --color-gold-5: rgba(185, 130, 23, 1);
+  --color-gold-shadow: rgba(158, 105, 2, 1);
+
+  /* ── Stroke / border accents ─────────────────────────────── */
+  --color-stroke-dark: rgba(41, 45, 48, 1);
+  --color-stroke-blue: rgba(43, 71, 88, 1);
+
+  /* ── Gradients (reusable shorthand) ──────────────────────── */
+  --gradient-gold: linear-gradient(
+    90deg,
+    var(--color-gold-1) 0%,
+    var(--color-gold-2) 17.734%,
+    var(--color-gold-3) 41.194%,
+    var(--color-gold-4) 66.108%,
+    var(--color-gold-5) 100%
+  );
+
+  /* ── Misc ────────────────────────────────────────────────── */
+  --color-input-focus: rgba(197, 146, 40, 1);
+  --color-form-overlay: rgba(211, 254, 50, 0);
+}

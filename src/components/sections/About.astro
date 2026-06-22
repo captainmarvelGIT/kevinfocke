@@ -3,6 +3,8 @@ import { Picture } from "astro:assets";
 import BaseButton from "../ui/BaseButton.astro";
 import leftHams from "../../assets/images/abthams_lft.png";
 import rightHams from "../../assets/images/abthams_rgt.png";
+import mobileleftHams from "../../assets/images/abthams_lft_mob.png";
+import mobilergtHams from "../../assets/images/abthams_rgt_mob.png";
 import pipImg from "../../assets/images/abthams_pip.png";
 
 interface Props {
@@ -43,13 +45,16 @@ const {
     />
   </div>
   <div class="about-images">
-    <Picture
-      src={leftHams}
-      alt="The Code Monster mascot, left"
-      formats={["avif", "webp"]}
-      width={744}
-      height={556} 
-    />
+    <picture>
+      <source media="(max-width: 767px)" srcset={mobileleftHams.src} />
+      <source media="(min-width: 768px)" srcset={leftHams.src} />
+      <img
+        src={leftHams.src}
+        alt="The Code Monster mascot, left"
+        width="744"
+        height="556"
+      />
+    </picture>
     <Picture
       src={pipImg}
       alt="pipe"
@@ -57,12 +62,15 @@ const {
       class="about-pipe"
       formats={["avif", "webp"]}
     />
-    <Picture
-      src={rightHams}
-      alt="The Code Monster mascot, right"
-      formats={["avif", "webp"]}
-      width={744}
-      height={556} 
-    />
+    <picture>
+      <source media="(max-width: 767px)" srcset={mobilergtHams.src} />
+      <source media="(min-width: 768px)" srcset={rightHams.src} />
+        <img
+        src={rightHams.src}
+        alt="The Code Monster mascot, left"
+        width="744"
+        height="556"
+      />
+    </picture>
   </div>
 </section>

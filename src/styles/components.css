@@ -332,9 +332,6 @@ a.logo {
 /* ── Banner Section ──────────────────────────────────────── */
 .bnnr_sec {
   padding: 120px 0 80px;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: top left calc(50% - 420px);
   position: relative;
   overflow: hidden;
 }
@@ -373,7 +370,7 @@ a.logo {
 .btm_anim_wrp button { background-color: transparent; padding: 0; position: relative; }
 .btm_anim_wrp button .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 @media (max-width: 1900px) {
-  .bnnr_sec { padding: 80px 0 40px; background-position: bottom left calc(50% - 250px); background-size: 1920px; }
+  .bnnr_sec { padding: 80px 0 40px;}
   .bnr_cnct { padding-left: 20px; }
   .bbnr_mons img { width: 450px; }
   .bnnr_sec .bnnr_bg{margin-left: -250px;}
@@ -381,7 +378,6 @@ a.logo {
 @media (max-width: 1399px) { .btm_anim_wrp { margin-top: -20px; } }
 @media (max-width: 1199px) {
   .bnr_cnct { padding-left: 0; width: 570px; }
-  .bnnr_sec { background-size: cover; background-position: bottom left calc(50% - 160px); }
   .btm_anim_wrp { display: none; }
   .bnnr_sec .bnnr_bg{margin-left: -160px;}
 }
@@ -400,7 +396,7 @@ a.logo {
   .bnnr_sec p { font-size: 14px; margin-bottom: 15px; }
 }
 @media (max-width: 767px) {
-  .bnnr_sec { padding: 20px 0; background-position: top center; }
+  .bnnr_sec { padding: 20px 0;}
   .bnnr_bttns { gap: 12px; }
   .bnnr_bttns a { padding: 0 12px; }
   .bbnr_mons { margin-bottom: -275px; }

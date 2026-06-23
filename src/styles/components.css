@@ -865,6 +865,11 @@ a.logo {
   width: 540px;
 }
 
+.bnnr_txts{
+  position: relative;
+  z-index: 1;
+}
+
 .bnnr_sec_cnctwrp {
   display: flex;
   flex-wrap: wrap;

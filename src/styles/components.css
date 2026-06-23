@@ -195,7 +195,7 @@ a.logo {
 }
 
 /* ── Books Card ──────────────────────────────────────────── */
-.books-card h4 {
+.books-card h5 {
   font-size: 35px; font-weight: 300; line-height: 41px;
   letter-spacing: 0.3em; text-align: center;
   text-transform: uppercase; margin-bottom: 15px;
@@ -246,7 +246,7 @@ a.logo {
 @media (max-width: 1199px) {
   .books-card h2 { font-size: 120px; }
   .books-card h2 span { left: 60px; top: 15px; font-size: 50px; -webkit-text-stroke-width: 2px; }
-  .books-card h4 { font-size: 25px; }
+  .books-card h5 { font-size: 25px; }
   .books-card .sec-book { margin-top: -195px; width: 300px; }
   .books-card .books-funda-wrap { padding-top: 170px; }
 }
@@ -256,7 +256,7 @@ a.logo {
   .books-card .books-funda-wrap > * + * { border-top: 1px solid var(--color-white-10); padding-top: 24px; }
 }
 @media (max-width: 767px) {
-  .books-card h4 { font-size: 15px; line-height: 1.5; }
+  .books-card h5 { font-size: 15px; line-height: 1.5; }
   .books-card h2 { font-size: 50px; }
   .books-card h2 span { left: 0px; top: 10px; font-size: 25px; -webkit-text-stroke-width: 1px; letter-spacing: -2px; }
   .books-card .sec-book { margin-top: -65px; width: 160px; }

@@ -30,6 +30,7 @@ const slides = [
                 alt={slide.text}
                 width={310}
                 height={472}
+                loading="lazy"
               />
               <p>{slide.text}</p>
             </div>
@@ -47,39 +48,40 @@ const slides = [
 <script>
   const wrap = document.querySelector(".concept-slider-wrap");
   async function initConceptSlider() {
-    // ✅ Load CSS from public folder
-    await new Promise<void>((resolve) => {
-      if (document.querySelector('link[href="swiper/swiper.min.css"]')) {
-        resolve();
-        return;
-      }
-      const link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = 'swiper/swiper.min.css';
-      link.onload = () => resolve();
-      document.head.appendChild(link);
-    });
+    if (!document.querySelector('link[href="swiper/swiper.min.css"]')) {
+      await new Promise<void>((resolve) => {
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "swiper/swiper.min.css";
+        link.onload = () => resolve();
+        link.onerror = () => resolve(); // don't block on error
+        document.head.appendChild(link);
+      });
+    }
     const [{ default: Swiper }, { Navigation, Autoplay }] = await Promise.all([
       import("swiper"),
       import("swiper/modules"),
     ]);
+
     new Swiper(".conceptSwiper", {
       modules: [Navigation, Autoplay],
       slidesPerView: 4,
-      speed: 400,
+      speed: 500,
       loop: true,
+      watchSlidesProgress: true,
       navigation: {
         nextEl: ".slider-btn-next",
         prevEl: ".slider-btn-prev",
       },
       autoplay: {
-        delay: 3000,
+        delay: 3500,
         disableOnInteraction: true,
+        pauseOnMouseEnter: false,
       },
       breakpoints: {
-        320: { slidesPerView: 2 },
-        991: { slidesPerView: 3 },
-        1199: { slidesPerView: 4 },
+        320: { slidesPerView: 2, speed: 400 },
+        991: { slidesPerView: 3, speed: 450 },
+        1199: { slidesPerView: 4, speed: 500 },
       },
     });
   }
@@ -93,7 +95,7 @@ const slides = [
             initConceptSlider();
           }
         },
-        { rootMargin: "300px" },
+        { rootMargin: "200px" }
       );
       observer.observe(wrap);
     } else {

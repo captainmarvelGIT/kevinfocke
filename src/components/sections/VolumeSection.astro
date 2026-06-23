@@ -39,7 +39,7 @@ const optimizedVolBg = await getImage({
           <h4>{vol_subtitle}</h4>
           <h2>{vol_title}</h2>
           <p>{vol_para}</p>
-          <BaseButton variant="primary" text="READ FREE SAMPLE" onclick="document.getElementById('contact_section')?.scrollIntoView({ behavior: 'smooth' })" />
+          <BaseButton variant="primary" text="READ FREE SAMPLE" data-scroll-to="contact_section" />
         </div>
         <div class="volume-image">
           <Picture src={Volsecimg} alt={vol_title} formats={['avif', 'webp']}/>

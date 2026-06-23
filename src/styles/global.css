@@ -1,9 +1,5 @@
 /* ── Reset ───────────────────────────────────────────────── */
 
-html {
-  scroll-behavior: smooth;
-}
-
 *,
 ::before,
 ::after {
@@ -137,6 +133,7 @@ body {
   font-size: 18px;
   line-height: 1.5;
   font-weight: 400;
+  overscroll-behavior: none;
 }
 
 /* ── Typography ──────────────────────────────────────────── */

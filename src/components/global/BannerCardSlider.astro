@@ -48,14 +48,17 @@ const slides = [
 
 <script>
   async function initBannerSlider() {
-    // ✅ Load from public folder - no CDN needed
-    await new Promise<void>((resolve) => {
-      const link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = 'swiper/swiper.min.css';
-      link.onload = () => resolve();
-      document.head.appendChild(link);
-    });
+    // Load CSS synchronously if not already present
+    if (!document.querySelector('link[href="swiper/swiper.min.css"]')) {
+      await new Promise<void>((resolve) => {
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "swiper/swiper.min.css";
+        link.onload = () => resolve();
+        link.onerror = () => resolve();
+        document.head.appendChild(link);
+      });
+    }
 
     const [{ default: Swiper }, { EffectCards }] = await Promise.all([
       import("swiper"),
@@ -67,7 +70,8 @@ const slides = [
       effect: "cards",
       grabCursor: true,
       loop: false,
-      speed: 400,
+      // Slightly longer speed to reduce GPU burst on mobile
+      speed: 450,
       cardsEffect: {
         perSlideOffset: 8,
         perSlideRotate: 6,
@@ -76,5 +80,11 @@ const slides = [
     });
   }
 
-  window.addEventListener("load", initBannerSlider);
+  // Use DOMContentLoaded instead of load so slider appears sooner,
+  // but only after the DOM is ready (avoids flash on slow connections)
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initBannerSlider);
+  } else {
+    initBannerSlider();
+  }
 </script>

@@ -74,7 +74,7 @@ const {
             <BaseButton
               text={banner_btn2.text}
               variant="secondary"
-              onclick="document.getElementById('book_card_sec')?.scrollIntoView({ behavior: 'smooth' })"
+              data-scroll-to="book_card_sec"
             />
           </div>
         </div>
@@ -84,12 +84,25 @@ const {
       </div>
     </div>
     <div class="btm_anim_wrp">
-      <button
-        onclick="document.getElementById('about_sec')?.scrollIntoView({ behavior: 'smooth' })"
-      >
+      <button data-scroll-to="about_sec">
         <span class="sr-only">Scroll to About Section</span>
         <AnimatedCircle />
       </button>
     </div>
   </div>
 </section>
+
+<script>
+  document.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    const btn = target.closest("[data-scroll-to]") as HTMLElement | null;
+    if (!btn) return;
+    const id = btn.dataset.scrollTo;
+    if (!id) return;
+    const el = document.getElementById(id);
+    if (el) {
+      e.preventDefault();
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+</script>

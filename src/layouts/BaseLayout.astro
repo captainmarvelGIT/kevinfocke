@@ -60,6 +60,9 @@ const {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogimg.src} />
+
+    <!-- Performance: hint browser to decode images off main thread -->
+    <meta http-equiv="x-dns-prefetch-control" content="on" />
   </head>
 
   <body>
